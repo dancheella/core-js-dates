@@ -72,8 +72,14 @@ function getDayName(date) {
  * Date('2024-02-13T00:00:00Z') => Date('2024-02-16T00:00:00Z')
  * Date('2024-02-16T00:00:00Z') => Date('2024-02-23T00:00:00Z')
  */
-function getNextFriday(/* date */) {
-  throw new Error('Not implemented');
+function getNextFriday(date) {
+  const nextDate = new Date(date);
+
+  do {
+    nextDate.setDate(nextDate.getDate() + 1);
+  } while (nextDate.getDay() !== 5);
+
+  return nextDate;
 }
 
 /**
@@ -199,8 +205,16 @@ function getCountWeekendsInMonth(month, year) {
  * Date(2024, 0, 31) => 5
  * Date(2024, 1, 23) => 8
  */
-function getWeekNumberByDate(/* date */) {
-  throw new Error('Not implemented');
+function getWeekNumberByDate(date) {
+  const startDateOfWeek = new Date(date.getFullYear(), 0);
+
+  let weekNumber = 1;
+
+  while (startDateOfWeek < date) {
+    if (startDateOfWeek.getDay() === 0) weekNumber += 1;
+    startDateOfWeek.setDate(startDateOfWeek.getDate() + 1);
+  }
+  return weekNumber;
 }
 
 /**
